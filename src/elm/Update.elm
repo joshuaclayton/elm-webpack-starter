@@ -1,16 +1,18 @@
-module Update
-    exposing
-        ( init
-        , subscriptions
-        , update
-        )
+module Update exposing
+    ( init
+    , subscriptions
+    , update
+    )
 
 import Model exposing (Model, Msg(..))
 
 
-init : ( Model, Cmd Msg )
+init : Model.Flags -> ( Model, Cmd Msg )
 init =
-    Model.initial ! []
+    always
+        ( Model.initial
+        , Cmd.none
+        )
 
 
 subscriptions : Model -> Sub Msg
@@ -22,4 +24,4 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            model ! []
+            ( model, Cmd.none )

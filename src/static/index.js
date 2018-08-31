@@ -1,5 +1,7 @@
 require("./styles/main.scss");
 
-const Elm = require("../elm/Main");
+const App = require("../elm/Main");
 
-Elm.Main.fullscreen();
+App.Elm.Main.init({
+  node: document.getElementById("elm")
+});

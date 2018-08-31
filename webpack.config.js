@@ -23,6 +23,7 @@ console.log("WEBPACK GO! Building for " + TARGET_ENV);
 
 // common webpack config (valid for dev and prod)
 var commonConfig = {
+  mode: TARGET_ENV,
   output: {
     path: outputPath,
     filename: `static/js/${outputFilename}`
@@ -69,7 +70,6 @@ if (isDev === true) {
               loader: "elm-webpack-loader",
               options: {
                 verbose: true,
-                warn: true,
                 debug: true
               }
             }
@@ -93,7 +93,14 @@ if (isProd === true) {
         {
           test: /\.elm$/,
           exclude: [/elm-stuff/, /node_modules/],
-          use: "elm-webpack-loader"
+          use: [
+            {
+              loader: "elm-webpack-loader",
+              options: {
+                optimize: true
+              }
+            }
+          ]
         },
         {
           test: /\.sc?ss$/,

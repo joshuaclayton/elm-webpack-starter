@@ -1,7 +1,4 @@
-module View
-    exposing
-        ( view
-        )
+module View exposing (view)
 
 import Html exposing (..)
 import Model exposing (Model)
