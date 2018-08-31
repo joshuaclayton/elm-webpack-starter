@@ -5,6 +5,7 @@ var merge = require("webpack-merge");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
+var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const prod = "production";
 const dev = "development";
@@ -106,7 +107,11 @@ if (isProd === true) {
           test: /\.sc?ss$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
-            use: ["css-loader", "postcss-loader", "sass-loader"]
+            use: [
+              { loader: "css-loader", options: { minimize: true } },
+              "postcss-loader",
+              "sass-loader"
+            ]
           })
         }
       ]
@@ -125,6 +130,19 @@ if (isProd === true) {
           from: "src/favicon.ico"
         }
       ])
-    ]
+    ],
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            pure_funcs: "F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",
+            keep_fargs: false,
+            unsafe_comps: true,
+            unsafe: true,
+            mangle: true
+          }
+        })
+      ]
+    }
   });
 }
