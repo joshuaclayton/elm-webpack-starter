@@ -77,7 +77,7 @@ if (isDev === true) {
           ]
         },
         {
-          test: /\.sc?ss$/,
+          test: /\.s?css$/,
           use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
         }
       ]
@@ -104,7 +104,7 @@ if (isProd === true) {
           ]
         },
         {
-          test: /\.sc?ss$/,
+          test: /\.s?css$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: [
